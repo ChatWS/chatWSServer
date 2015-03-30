@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2015 9:06:20 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.User" table="user" catalog="webservicedb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="displayName" type="string">
+            <column name="display_name" length="45" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" length="45" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="full_name" length="45" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="45" not-null="true" />
+        </property>
+        <property name="status" type="byte">
+            <column name="status" not-null="true" />
+        </property>
+        <property name="image" type="binary">
+            <column name="image" />
+        </property>
+        <set name="chatUsersForRecieverId" table="chat_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reciever_id" not-null="true" />
+            </key>
+            <one-to-many class="pojo.ChatUser" />
+        </set>
+        <set name="chatUsersForSenderId" table="chat_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sender_id" not-null="true" />
+            </key>
+            <one-to-many class="pojo.ChatUser" />
+        </set>
+        <set name="addUsersForSenderId" table="add_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sender_id" not-null="true" />
+            </key>
+            <one-to-many class="pojo.AddUser" />
+        </set>
+        <set name="addUsersForReceiverId" table="add_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="receiver_id" not-null="true" />
+            </key>
+            <one-to-many class="pojo.AddUser" />
+        </set>
+    </class>
+</hibernate-mapping>

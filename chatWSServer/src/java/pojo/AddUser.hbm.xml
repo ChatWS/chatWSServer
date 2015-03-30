@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2015 9:06:20 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.AddUser" table="add_user" catalog="webservicedb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userBySenderId" class="pojo.User" fetch="select">
+            <column name="sender_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userByReceiverId" class="pojo.User" fetch="select">
+            <column name="receiver_id" not-null="true" />
+        </many-to-one>
+        <property name="mess" type="string">
+            <column name="mess" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
